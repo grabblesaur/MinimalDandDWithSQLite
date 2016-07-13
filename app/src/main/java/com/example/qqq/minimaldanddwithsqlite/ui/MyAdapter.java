@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.qqq.minimaldanddwithsqlite.R;
@@ -12,28 +13,25 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableItemViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
         implements DraggableItemAdapter<MyAdapter.MyViewHolder>{
     List<MyItem> mItems;
 
-    public MyAdapter() {
+    public MyAdapter(List<MyItem> items) {
         setHasStableIds(true);
-
-        mItems = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            mItems.add(new MyItem(i, "Item " + i));
-        }
+        mItems = items;
     }
 
     public class MyViewHolder  extends AbstractDraggableItemViewHolder{
+        ImageView imageView;
         TextView textView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.item_tv);
+            imageView = (ImageView) itemView.findViewById(R.id.item_iv_image);
+            textView = (TextView) itemView.findViewById(R.id.item_tv_text);
         }
     }
 
@@ -41,7 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 
     @Override
     public long getItemId(int position) {
-        return mItems.get(position).id;
+        return mItems.get(position).getId();
     }
 
     @Override
@@ -55,7 +53,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         MyItem item = mItems.get(position);
-        holder.textView.setText(item.text);
+
+        holder.imageView.setImageResource(item.getResourceId());
+        holder.textView.setText(item.getName());
     }
 
     @Override

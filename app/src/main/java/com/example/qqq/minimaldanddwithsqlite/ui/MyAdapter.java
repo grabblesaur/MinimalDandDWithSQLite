@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.qqq.minimaldanddwithsqlite.R;
-import com.example.qqq.minimaldanddwithsqlite.model.MyItem;
+import com.example.qqq.minimaldanddwithsqlite.model.Recipe;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemAdapter;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableItemViewHolder;
@@ -17,11 +17,11 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
         implements DraggableItemAdapter<MyAdapter.MyViewHolder>{
-    List<MyItem> mItems;
+    List<Recipe> mRecipeList;
 
-    public MyAdapter(List<MyItem> items) {
+    public MyAdapter(List<Recipe> recipeList) {
         setHasStableIds(true);
-        mItems = items;
+        mRecipeList = recipeList;
     }
 
     public class MyViewHolder  extends AbstractDraggableItemViewHolder{
@@ -39,7 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 
     @Override
     public long getItemId(int position) {
-        return mItems.get(position).getId();
+        return mRecipeList.get(position).getId();
     }
 
     @Override
@@ -52,7 +52,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        MyItem item = mItems.get(position);
+        Recipe item = mRecipeList.get(position);
 
         holder.imageView.setImageResource(item.getResourceId());
         holder.textView.setText(item.getName());
@@ -60,7 +60,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return mRecipeList.size();
     }
 
     // Methods of DraggableItemAdapter
@@ -77,13 +77,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 
     @Override
     public void onMoveItem(int fromPosition, int toPosition) {
-        MyItem movedItem = mItems.remove(fromPosition);
-        mItems.add(toPosition, movedItem);
+        Recipe movedItem = mRecipeList.remove(fromPosition);
+        mRecipeList.add(toPosition, movedItem);
         notifyItemMoved(fromPosition, toPosition);
     }
 
     @Override
     public boolean onCheckCanDrop(int draggingPosition, int dropPosition) {
         return true;
+    }
+
+    public List<Recipe> getRecipeList() {
+        return mRecipeList;
     }
 }

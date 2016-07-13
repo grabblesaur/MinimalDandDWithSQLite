@@ -1,13 +1,13 @@
 package com.example.qqq.minimaldanddwithsqlite.model;
 
-public class MyItem {
+public class Recipe {
     private long id;
     private String name;
     private int resourceId;
     private String ingredients;
     private String directions;
 
-    public MyItem(long id, String name, int resourceId, String ingredients, String directions) {
+    public Recipe(long id, String name, int resourceId, String ingredients, String directions) {
         this.id = id;
         this.name = name;
         this.resourceId = resourceId;

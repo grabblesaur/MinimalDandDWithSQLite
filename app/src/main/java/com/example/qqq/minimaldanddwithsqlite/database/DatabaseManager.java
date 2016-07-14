@@ -13,7 +13,7 @@ import java.util.Locale;
 
 public class DatabaseManager {
 
-    private static final String TAG = DatabaseManager.class.getSimpleName();
+    public static final String TAG = DatabaseManager.class.getSimpleName();
 
     private SQLiteDatabase mDatabase;
 
